@@ -1,6 +1,9 @@
 {% extends 'main.html' %}
 
 {% block content %}
+
+<img src="{{ bathroom.featured_image.url }}">
+
 <h1>{{bathroom.owner}}</h1>
 <hr>
 {% for tag in bathroom.tags.all %}
@@ -8,6 +11,6 @@
 {% endfor %}
 <hr>
 <br>
-<p>{{bathroom.review}}</p>
+<p>{{bathroom.reviews}}</p>
 
 {% endblock %}

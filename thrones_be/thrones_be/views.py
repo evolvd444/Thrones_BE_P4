@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from .models import Bathroom
 from django.http import HttpResponse
 from .forms import BathroomForm
+from django.http import JsonResponse
+
 # from .forms import ArtistForm
 # from rest_framework import generics
 # from .serializers import ArtistSerializer, SongSerializer
@@ -52,9 +54,12 @@ def deleteThrone(request, pk):
         context = {'object': bathroom}
         return render(request, 'thrones_be/delete_obj.html', context)
 
-
-#     Artist.objects.get(id=pk).delete()
-#     return redirect('artist_list')
+def bathroom_json(request):
+    bathrooms = Bathroom.objects.all()
+    bathrooms_list = list(bathrooms)
+    return JsonResponse(bathrooms_list, safe=False)
+    # Artist.objects.get(id=pk).delete()
+    # return redirect('artist_list')
 
 # def demo_json(request):
 #     data = {'a':1, 'b': True}
