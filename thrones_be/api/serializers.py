@@ -1,6 +1,13 @@
 from rest_framework import serializers
-from thrones_be.models import Bathroom, Tag
+from thrones_be.models import Bathroom, Tag, Review
 # from users.models import Profile
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = '__all__'
+
 
 class BathroomSerializer(serializers.ModelSerializer):
     class Meta:
