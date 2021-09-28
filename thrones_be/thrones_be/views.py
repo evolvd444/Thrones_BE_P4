@@ -21,7 +21,7 @@ def bathroom(request, pk):
     
     return render(request,'thrones_be/throne.html', {'bathroom': bathroomObj})
 
-# @login_required(Login_url="login")
+@login_required(login_url="login")
 def createThrone(request):
     form = BathroomForm()
     if request.method == 'POST':
@@ -33,7 +33,7 @@ def createThrone(request):
     context = {'form': form}
     return render(request,'thrones_be/thrones_list.html', context)
 
-# @login_required(Login_url="login")
+@login_required(login_url="login")
 def updateThrone(request, pk):
     bathroom = Bathroom.objects.get(id=pk)
     form = BathroomForm(instance=bathroom)
@@ -48,7 +48,7 @@ def updateThrone(request, pk):
     return render(request,'thrones_be/thrones_list.html', context)
 
 
-# @login_required(Login_url="login")
+@login_required(login_url="login")
 def deleteThrone(request, pk):
         bathroom = Bathroom.objects.get(id=pk)
         if request.method == 'POST':

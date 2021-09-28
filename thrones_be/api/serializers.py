@@ -22,8 +22,13 @@ class TagSerializer(serializers.ModelSerializer):
 class BathroomSerializer(serializers.ModelSerializer):
     # owner = ProfileSerializer(many=False)
     tags = TagSerializer(many=True)
-
+    reviews = serializers.SerializerMethodField()
 
     class Meta:
         model = Bathroom
         fields = '__all__'
+    
+    def get_reviews(self, obj):
+        reviews = obj.review_set.all()
+        serializer = ReviewSerializer(reviews, many = True)
+        return serializer.data
