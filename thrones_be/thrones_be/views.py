@@ -3,11 +3,12 @@ from .models import Bathroom
 from django.http import HttpResponse
 from .forms import BathroomForm
 from django.http import JsonResponse
-
+from django.contrib.auth.decorators import login_required
 # from .forms import ArtistForm
 # from rest_framework import generics
 # from .serializers import ArtistSerializer, SongSerializer
 # Create your views here.
+
 
 
 def bathrooms(request):
@@ -20,6 +21,7 @@ def bathroom(request, pk):
     
     return render(request,'thrones_be/throne.html', {'bathroom': bathroomObj})
 
+# @login_required(Login_url="login")
 def createThrone(request):
     form = BathroomForm()
     if request.method == 'POST':
@@ -31,7 +33,7 @@ def createThrone(request):
     context = {'form': form}
     return render(request,'thrones_be/thrones_list.html', context)
 
-
+# @login_required(Login_url="login")
 def updateThrone(request, pk):
     bathroom = Bathroom.objects.get(id=pk)
     form = BathroomForm(instance=bathroom)
@@ -45,6 +47,8 @@ def updateThrone(request, pk):
     context = {'form': form}
     return render(request,'thrones_be/thrones_list.html', context)
 
+
+# @login_required(Login_url="login")
 def deleteThrone(request, pk):
         bathroom = Bathroom.objects.get(id=pk)
         if request.method == 'POST':

@@ -5,6 +5,7 @@
 <table>
     <tr>
         <th>ID</th>
+        <th>User</th>
         <th>Bathroom</th>
         <th>Images</th>
         <th>Positive Votes</th>
@@ -15,6 +16,7 @@
     {% for bathroom in bathrooms %} 
     <tr>
         <td>{{bathroom.id}}</td>
+        <td>{{bathroom.user.name}}</td>
         <td>{{bathroom.owner}}</td>
         <td><img style= "width: 30%; height:20%; text-align: center; padding-left:15vw;" src={{bathroom.image}} alt=""></td>
         <td>{{bathroom.vote_ratio}}%</td>

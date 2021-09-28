@@ -2,10 +2,30 @@
 {% block content %}
 
 <h1>Users Profiles</h1>
+<table>
+    <tr>
+        <th>Username</th>
+        <th>name</th>
+        <th>gender</th>
+        <th>Profile_Photo</th>
+        <th>Bio</th>
+        <th>short_intro</th>
+        <th>Created</th>
+    
+    </tr>
+    {% for profile in profiles %} 
+    <tr>
+        <td>{{profile.username}}</td>
+        <td>{{profile.name}}</td>
+        <td>{{profile.gender}}</td>
+        <td><img style= "width: 30%; height:20%; text-align: center; padding-left:15vw;" src= "{{ profile.profile_image.url }}" alt=""></td>
+        <td>{{profile.bio|slice:"150"}}</td>
+        <td>{{profile.short_intro|slice:"60"}}</td>
+        <td>{{profile.created}}</td>
+       
+    </tr>
 
-    {% for bathroom in bathrooms %} 
-   
     {% endfor %}
-
+</table>
 
 {% endblock content %}

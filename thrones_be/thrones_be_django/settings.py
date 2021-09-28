@@ -81,8 +81,8 @@ WSGI_APPLICATION = 'thrones_be_django.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'thrones_be',
-        'USER': 'throneuser',
+        'NAME': 'thrones',
+        'USER': 'thronesuser',
         'PASSWORD': 'thronespw',
         'HOST': 'localhost'
     }

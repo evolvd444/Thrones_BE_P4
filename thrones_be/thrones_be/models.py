@@ -1,8 +1,9 @@
 from django.db import models
 import uuid
-
+from users.models import Profile
 # C
 class Bathroom(models.Model):
+    user = models.ForeignKey(Profile, null=True, blank=True, on_delete=models.SET_NULL)
     owner = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     image = models.TextField(null=True, blank=True)
