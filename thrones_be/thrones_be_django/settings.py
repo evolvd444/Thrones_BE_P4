@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-mwm*all6ve4%op5mzhlukfac(k^njdc%+$nqt4jzkr)gxa*$9f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://thrones-app.herokuapp.com/']
+ALLOWED_HOSTS = ['thrones-app.herokuapp.com']
 
 
 # Application definition
