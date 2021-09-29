@@ -1,1 +1,1 @@
-web: gunicorn thrones_be_django.wsgi --log-file -
+web: gunicorn thrones_be.wsgi --log-file -
