@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<h1>Thrones</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>User</th>
+        <th>Bathroom</th>
+        <th>Images</th>
+        <th>Positive Votes</th>
+        <th>Votes</th>
+        <th>Created</th>
+        <th></th>
+    </tr>
+    {% for bathroom in bathrooms %} 
+    <tr>
+        <td>{{bathroom.id}}</td>
+        <td>{{bathroom.user.name}}</td>
+        <td>{{bathroom.owner}}</td>
+        <td><img style= "width: 30%; height:20%; text-align: center; padding-left:15vw;" src={{bathroom.image}} alt=""></td>
+        <td>{{bathroom.vote_ratio}}%</td>
+        <td>{{bathroom.vote_total}}</td>
+        <td>{{bathroom.created}}</td>
+        <td><a href="{% url 'update-throne' bathroom.id %}">Edit</a></td>
+        <td><a href="{% url 'delete-throne' bathroom.id %}">Delete</a></td>
+        <td><a href="{% url 'bathroom' bathroom.id %}">View</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock content %}
