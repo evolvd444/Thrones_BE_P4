@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 # Create your views here.
@@ -64,5 +65,13 @@ def profiles(request):
     context = {'profiles': profiles}
     return render(request, 'users/profiles.html', context)
 
-def userProfile(request):
-    return render(request, 'users/user-profile.html')
+def userProfile(request,pk):
+    profile = Profile.objects.get(id=pk)
+    context = {'profile':profile}
+    return render(request, 'users/user-profile.html', context)
+
+@login_required(login_url="login")
+def userAccount(request):
+    profile = request.user.profile
+    context = {'profile': profile}
+    return render(request, 'users/account.html', context)

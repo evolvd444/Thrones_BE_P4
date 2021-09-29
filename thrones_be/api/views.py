@@ -10,9 +10,9 @@ def getRoutes(request):
 
     routes = [
 
-        {'GET':'/api/bathroom'},
-        {'GET':'/api/bathroom/id'},
-        {'GET':'/api/bathroom/id/vote'},
+        {'GET':'/api/throne'},
+        {'GET':'/api/throne/id'},
+        {'GET':'/api/throne/id/vote'},
 
         {'POST': '/api/users/token'},
         {'POST': '/api/users/token/refresh'},
@@ -20,7 +20,7 @@ def getRoutes(request):
     ]
     return Response(routes)
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def getBathrooms(request):
     bathrooms = Bathroom.objects.all()
     serializer = BathroomSerializer(bathrooms, many=True)
@@ -28,6 +28,6 @@ def getBathrooms(request):
 
 @api_view(['GET'])
 def getBathroom(request, pk):
-    bathrooms = Bathroom.objects.get(id=pk)
-    serializer = BathroomSerializer(bathrooms, many=False)
+    bathroom = Bathroom.objects.get(id=pk)
+    serializer = BathroomSerializer(bathroom, many=False)
     return Response(serializer.data)

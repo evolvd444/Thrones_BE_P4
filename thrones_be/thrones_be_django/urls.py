@@ -22,10 +22,11 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include('api.urls')),
     path('', include('users.urls')),
     path('thrones/', include('thrones_be.urls')),
     
-    path('api/', include('api.urls')),
+    
 ]
 
 
