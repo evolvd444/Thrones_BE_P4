@@ -22,7 +22,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ReviewSerializer(serializers.ModelSerializer):
-    tags = TagSerializer(many=True)
     class Meta:
         model = Review
         fields = '__all__'

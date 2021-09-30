@@ -5,4 +5,5 @@ urlpatterns = [
     path('', views.getRoutes),
     path('thrones/', views.getBathrooms),
     path('thrones/<str:pk>/', views.getBathroom),
+
 ]
