@@ -23,11 +23,14 @@ def bathroom(request, pk):
 
 @login_required(login_url="login")
 def createThrone(request):
+    profile = request.user.profile
     form = BathroomForm()
     if request.method == 'POST':
-        form = BathroomForm(request.POST)
+        form = BathroomForm(request.POST, request.FILES)
         if form.is_valid():
-             form.save()
+             bathroom = form.save(commit=False)
+             bathroom.user = profile
+             bathroom.save()
              return redirect('bathrooms')
 
     context = {'form': form}
@@ -35,7 +38,8 @@ def createThrone(request):
 
 @login_required(login_url="login")
 def updateThrone(request, pk):
-    bathroom = Bathroom.objects.get(id=pk)
+    profile = request.user.profile
+    bathroom = profile.bathroom_set.get(id=pk)
     form = BathroomForm(instance=bathroom)
 
     if request.method == 'POST':
@@ -50,7 +54,8 @@ def updateThrone(request, pk):
 
 @login_required(login_url="login")
 def deleteThrone(request, pk):
-        bathroom = Bathroom.objects.get(id=pk)
+        profile = request.user.profile
+        bathroom = profile.bathroom_set.get(id=pk)
         if request.method == 'POST':
             bathroom.delete()
             return redirect('bathrooms')

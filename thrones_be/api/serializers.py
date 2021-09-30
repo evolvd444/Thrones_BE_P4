@@ -3,10 +3,7 @@ from thrones_be.models import Bathroom, Tag, Review
 from users.models import Profile
 
 
-class ReviewSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Review
-        fields = '__all__'
+
 
 
 class BathroomSerializer(serializers.ModelSerializer):
@@ -22,6 +19,12 @@ class TagSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
+        fields = '__all__'
+
+class ReviewSerializer(serializers.ModelSerializer):
+    tags = TagSerializer(many=True)
+    class Meta:
+        model = Review
         fields = '__all__'
 
 class BathroomSerializer(serializers.ModelSerializer):

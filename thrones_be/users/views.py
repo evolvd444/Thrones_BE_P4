@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
+from .forms import CustomUserCreationForm, ProfileForm
 # Create your views here.
 
 def loginUser(request):
@@ -40,10 +41,10 @@ def logoutUser(request):
 
 def registerUser(request):
     page = 'register'
-    form = UserCreationForm()
+    form = CustomUserCreationForm()
 
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
@@ -52,7 +53,7 @@ def registerUser(request):
             messages.success(request, "User account was successfully created!")
 
             login(request, user)
-            return redirect('profiles')
+            return redirect('edit-account')
 
         else:
             messages.success(request, 'An error has occured during registration')
@@ -74,7 +75,22 @@ def userProfile(request,pk):
 def userAccount(request):
     profile = request.user.profile
 
-    skills = profile.skill_set.all()
+    bathrooms = profile.bathroom_set.all()
 
-    context = {'profile': profile}
+    context = {'profile': profile, 'bathrooms': bathrooms }
     return render(request, 'users/account.html', context)
+
+@login_required(login_url="login")
+def editAccount(request):
+    profile = request.user.profile
+    form = ProfileForm(instance=profile)
+
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+
+            return redirect('account')
+
+    context = {'form': form}
+    return render(request, 'users/profile_form.html', context)

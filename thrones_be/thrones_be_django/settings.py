@@ -135,10 +135,10 @@ CORS_ALLOW_ALL_ORIGINS = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/images/'
 
-# STATICFILES_DIRS = [
-#     BASE_DIR / 'static'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
     
-# ]
+]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -155,6 +155,14 @@ AWS_S3_FILE_OVERWRITE = False
 AWS_ACCESS_KEY_ID = 'AKIA2NU75ODTEJ5MKOL3'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'thrones-bucket'
+
+
+# DEFAULT_FILE_STORAGE = os.environ['DEFAULT_FILE_STORAGE']
+# AWS_QUERYSTRING_AUTH = False
+# AWS_S3_FILE_OVERWRITE = False
+# AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+# AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+# AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 
 if os.getcwd() == '/app':
     DEBUG = False

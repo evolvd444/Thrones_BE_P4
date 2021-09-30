@@ -7,7 +7,7 @@
 {% if request.user.is_authenticated %}
 <a href="{% url 'bathrooms' %}"> Thrones </a>
 <a href="{% url 'profiles' %}"> Users </a>
-
+<a href="{% url 'account' %}"> Account </a>
 <a href="{% url 'logout' %}"> Logout </a>
 {% else %}
 <a href="{% url 'login' %}"> Login/Sign Up </a>
