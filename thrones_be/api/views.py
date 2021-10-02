@@ -20,13 +20,13 @@ def getRoutes(request):
     ]
     return Response(routes)
 
-@api_view(['GET', 'POST', 'PUT', 'DELETE'])
+@api_view(['GET', 'POST'])
 def getBathrooms(request):
     bathrooms = Bathroom.objects.all()
     serializer = BathroomSerializer(bathrooms, many=True)
     return Response(serializer.data)
 
-@api_view(['GET', 'POST', 'PUT', 'DELETE'])
+@api_view(['GET'])
 def getBathroom(request, pk):
     bathroom = Bathroom.objects.get(id=pk)
     serializer = BathroomSerializer(bathroom, many=False)
