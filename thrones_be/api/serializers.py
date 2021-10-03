@@ -6,7 +6,7 @@ from users.models import Profile
 
 
 
-class BathroomSerializer(serializers.ModelSerializer):
+class ThroneSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bathroom
         fields = '__all__'
