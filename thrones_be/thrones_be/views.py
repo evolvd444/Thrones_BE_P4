@@ -1,76 +1,83 @@
 from django.shortcuts import render, redirect
-from .models import Bathroom
+from .models import Bathroom, Profile
 from django.http import HttpResponse
 from .forms import BathroomForm
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from rest_framework import viewsets
-from .serializers import BathroomSerializer
+from .serializers import ProfileSerializer, ThroneSerializer
 # from .forms import ArtistForm
 # from rest_framework import generics
 # from .serializers import ArtistSerializer, SongSerializer
 # Create your views here.
 
-# class ThroneList(viewsets.ModelViewSet):
-#     queryset = Bathroom.objects.all()
-#     serializer_class = BathroomSerializer dylan
+class ThroneList(viewsets.ModelViewSet):
+    queryset = Bathroom.objects.all()
+    serializer_class = ThroneSerializer
 
-def bathrooms(request):
-    bathrooms = Bathroom.objects.all()
-    context = {'bathrooms': bathrooms}
-    return render(request,'thrones_be/thrones.html', context)
+class ProfileList(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
 
-def bathroom(request, pk):
-    bathroomObj = Bathroom.objects.get(id=pk)
+
+# def bathrooms(request):
+#     bathrooms = Bathroom.objects.all()
+#     context = {'bathrooms': bathrooms}
+#     return render(request,'thrones_be/thrones.html', context)
+
+# def bathroom(request, pk):
+#     bathroomObj = Bathroom.objects.get(id=pk)
     
-    return render(request,'thrones_be/throne.html', {'bathroom': bathroomObj})
+#     return render(request,'thrones_be/throne.html', {'bathroom': bathroomObj})
 
-# @login_required(login_url="login")
-def createThrone(request):
-    # profile = request.user.profile
-    form = BathroomForm()
-    if request.method == 'POST':
-        form = BathroomForm(request.POST, request.FILES)
-        if form.is_valid():
-             bathroom = form.save(commit=False)
-            #  bathroom.user = profile
-             bathroom.save()
-             return redirect('bathrooms')
+# # @login_required(login_url="login")
+# def createThrone(request):
+#     # profile = request.user.profile
+#     form = BathroomForm()
+#     if request.method == 'POST':
+#         print("condition1 met")
+#         form = BathroomForm(request.POST, request.FILES)
+#         if form.is_valid():
+#              print("condition2 met")
+#              bathroom = form.save(commit=False)
+#             #  bathroom.user = profile
+#              bathroom.save()
+#              return redirect('bathrooms')
 
-    context = {'form': form}
-    return render(request,'thrones_be/thrones_list.html', context)
+#     context = {'form': form}
+#     return render(request,'thrones_be/thrones_list.html', context)
 
-# @login_required(login_url="login")
-def updateThrone(request, pk):
-    profile = request.user.profile
-    bathroom = profile.bathroom_set.get(id=pk)
-    form = BathroomForm(instance=bathroom)
+# # @login_required(login_url="login")
+# def updateThrone(request, pk):
+#     profile = request.user.profile
+#     bathroom = profile.bathroom_set.get(id=pk)
+#     form = BathroomForm(instance=bathroom)
 
-    if request.method == 'POST':
-        form = BathroomForm(request.POST, instance=bathroom)
-        # if form.is_valid():
-        form.save()
-        return redirect('bathrooms')
+#     if request.method == 'POST':
+#         form = BathroomForm(request.POST, instance=bathroom)
+#         # if form.is_valid():
+#         form.save()
+#         return redirect('bathrooms')
 
-    context = {'form': form}
-    return render(request,'thrones_be/thrones_list.html', context)
+#     context = {'form': form}
+#     return render(request,'thrones_be/thrones_list.html', context)
 
 
-# @login_required(login_url="login")
-def deleteThrone(request, pk):
-        profile = request.user.profile
-        bathroom = profile.bathroom_set.get(id=pk)
-        if request.method == 'POST':
-            bathroom.delete()
-            return redirect('bathrooms')
+# # @login_required(login_url="login")
+# def deleteThrone(request, pk):
+#         profile = request.user.profile
+#         bathroom = profile.bathroom_set.get(id=pk)
+#         if request.method == 'POST':
+#             bathroom.delete()
+#             return redirect('bathrooms')
 
-        context = {'object': bathroom}
-        return render(request, 'thrones_be/delete_obj.html', context)
+#         context = {'object': bathroom}
+#         return render(request, 'thrones_be/delete_obj.html', context)
 
-def bathroom_json(request):
-    bathrooms = Bathroom.objects.all()
-    bathrooms_list = list(bathrooms)
-    return JsonResponse(bathrooms_list, safe=False)
+# def bathroom_json(request):
+#     bathrooms = Bathroom.objects.all()
+#     bathrooms_list = list(bathrooms)
+#     return JsonResponse(bathrooms_list, safe=False)
 
 
 
