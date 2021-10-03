@@ -18,15 +18,19 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
+# from thrones_be import views
 
+# from rest_framework import routers
+
+# router = routers.DefaultRouter()
+# router.register(r'thrones', views.ThroneList, 'throne')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
     path('', include('users.urls')),
     path('thrones/', include('thrones_be.urls')),
-    
-    
+    # path('api/', include(router.urls)),dylan,
 ]
 
 

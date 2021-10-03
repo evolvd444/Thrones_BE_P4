@@ -4,12 +4,16 @@ from django.http import HttpResponse
 from .forms import BathroomForm
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+from rest_framework import viewsets
+from .serializers import BathroomSerializer
 # from .forms import ArtistForm
 # from rest_framework import generics
 # from .serializers import ArtistSerializer, SongSerializer
 # Create your views here.
 
-
+# class ThroneList(viewsets.ModelViewSet):
+#     queryset = Bathroom.objects.all()
+#     serializer_class = BathroomSerializer dylan
 
 def bathrooms(request):
     bathrooms = Bathroom.objects.all()
@@ -36,7 +40,7 @@ def createThrone(request):
     context = {'form': form}
     return render(request,'thrones_be/thrones_list.html', context)
 
-@login_required(login_url="login")
+# @login_required(login_url="login")
 def updateThrone(request, pk):
     profile = request.user.profile
     bathroom = profile.bathroom_set.get(id=pk)
@@ -52,7 +56,7 @@ def updateThrone(request, pk):
     return render(request,'thrones_be/thrones_list.html', context)
 
 
-@login_required(login_url="login")
+# @login_required(login_url="login")
 def deleteThrone(request, pk):
         profile = request.user.profile
         bathroom = profile.bathroom_set.get(id=pk)
@@ -67,6 +71,13 @@ def bathroom_json(request):
     bathrooms = Bathroom.objects.all()
     bathrooms_list = list(bathrooms)
     return JsonResponse(bathrooms_list, safe=False)
+
+
+
+
+
+
+
     # Artist.objects.get(id=pk).delete()
     # return redirect('artist_list')
 

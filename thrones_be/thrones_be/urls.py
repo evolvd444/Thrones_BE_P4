@@ -1,8 +1,10 @@
 from django.urls import path
+# from .views import ThroneList
 from . import views
 
 
 urlpatterns = [
+    #  path('api/thrones', ThroneList.as_view()),dylan
     path('bathroom/<str:pk>/', views.bathroom, name="bathroom"),
     path('bathrooms/', views.bathrooms, name= "bathrooms"),
     path('create-throne', views.createThrone, name="create-throne"),

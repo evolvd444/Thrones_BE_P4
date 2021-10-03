@@ -7,7 +7,10 @@ from .serializers import ProfileSerializer
 from .serializers import ReviewSerializer, ThroneSerializer
 from thrones_be.models import Bathroom, Review
 from users.models import Profile
-@api_view(['GET'])
+from rest_framework import viewsets
+
+
+@api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def getRoutes(request):
 
     routes = [
@@ -15,7 +18,9 @@ def getRoutes(request):
         {'GET':'/api/thrones'},
         {'GET':'/api/thrones/id'},
         {'GET':'/api/thrones/id/vote'},
-
+        {'POST': '/api/thrones/create-throne'},
+        {'PUT': '/api/thrones/edit-throne'},
+        {'DELETE': '/api/thrones/delete-throne'},
         {'POST': '/api/profiles/'},
         {'POST': '/api/profiles/id'},
 
@@ -57,3 +62,5 @@ def getReviews(request):
     reviews = Review.objects.all()
     serializer = ReviewSerializer(reviews, many = True)
     return Response(serializer.data)
+
+
