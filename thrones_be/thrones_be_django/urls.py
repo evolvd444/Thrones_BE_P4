@@ -23,16 +23,17 @@ from thrones_be.views import ThroneList
 from rest_framework import routers
 from rest_framework.routers import DefaultRouter
 
-router = DefaultRouter()
-router.register(r'thrones', views.ThroneList, 'throne')
-router.register(r'profile', views.ProfileList, 'profile')
+# router = DefaultRouter()
+# router.register(r'thrones', views.ThroneList, 'throne')
+# router.register(r'profile', views.ProfileList, 'profile')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('api/', include('api.urls')),
-    # path('', include('users.urls')),
-    # path('thrones/', include('thrones_be.urls')),
-    path('api/', include(router.urls)),
+    path('', include('thrones_be.urls')),
+    path('api/', include('api.urls')),
+    path('users/', include('users.urls')),
+    
+    # path('api/', include(router.urls)),
 ]
 
 

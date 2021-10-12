@@ -23,11 +23,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True if os.environ['MODE'] == 'dev' else False
-
-
+# DEBUG = True if os.environ['MODE'] == 'dev' else False
+MODE= 'dev'
+DEBUG = True
 ALLOWED_HOSTS = ['*']
-
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        )
+}
 
 # Application definition
 
@@ -48,22 +52,23 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     
-
+    
     'django.middleware.security.SecurityMiddleware',
-
+    'corsheaders.middleware.CorsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    
 
     'django.contrib.sessions.middleware.SessionMiddleware',
     
 
     'django.middleware.common.CommonMiddleware',
     
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'corsheaders.middleware.CorsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'thrones_be_django.urls'
@@ -92,10 +97,19 @@ WSGI_APPLICATION = 'thrones_be_django.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#   'default': dj_database_url.config(conn_max_age=600)
+# }
 DATABASES = {
-  'default': dj_database_url.config(conn_max_age=600)
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'thrones2',
+        'USER': 'Djangohard',
+        'PASSWORD': 'Djangohard74708x!',
+        'HOST': 'thrones-be.cljhyh3kv7kl.us-east-1.rds.amazonaws.com',
+        'PORT': '5444',
+    }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
