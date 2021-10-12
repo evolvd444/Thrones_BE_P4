@@ -11,13 +11,13 @@ from .serializers import ProfileSerializer, ThroneSerializer
 # from .serializers import ArtistSerializer, SongSerializer
 # Create your views here.
 
-class ThroneList(viewsets.ModelViewSet):
-    queryset = Bathroom.objects.all()
-    serializer_class = ThroneSerializer
+# class ThroneList(viewsets.ModelViewSet):
+#     queryset = Bathroom.objects.all()
+#     serializer_class = ThroneSerializer
 
-class ProfileList(viewsets.ModelViewSet):
-    queryset = Profile.objects.all()
-    serializer_class = ProfileSerializer
+# class ProfileList(viewsets.ModelViewSet):
+#     queryset = Profile.objects.all()
+#     serializer_class = ProfileSerializer
 
 
 def bathrooms(request):
@@ -49,10 +49,12 @@ def createThrone(request):
 
 # @login_required(login_url="login")
 def updateThrone(request, pk):
-    profile = request.user.profile
-    bathroom = profile.bathroom_set.get(id=pk)
-    form = BathroomForm(instance=bathroom)
+    # profile = request.user.profile
 
+    # bathroom = profile.bathroom_set.get(id=pk)
+    
+    bathroom = Bathroom.objects.get(id=pk)
+    form = BathroomForm(instance=bathroom)
     if request.method == 'POST':
         form = BathroomForm(request.POST, instance=bathroom)
         # if form.is_valid():

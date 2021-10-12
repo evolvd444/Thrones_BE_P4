@@ -19,7 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from thrones_be import views
-from thrones_be.views import ThroneList
+# from thrones_be.views import ThroneList
 from rest_framework import routers
 from rest_framework.routers import DefaultRouter
 
